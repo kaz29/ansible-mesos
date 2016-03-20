@@ -34,7 +34,22 @@
     chdir: /usr/local/src/mesos-{{ mesos_version }}/build
   when: mesos_makefile_stat.stat.exists == False
 
+- name: Check mesos command exists
+  stat: path=/usr/local/src/mesos-{{ mesos_version }}/build/src/mesos
+  register: mesos_mesos_command_stat
+
 - name: Build mesos
   command: "make"
   args:
     chdir: /usr/local/src/mesos-{{ mesos_version }}/build
+  when: mesos_mesos_command_stat.stat.exists == False
+
+- name: Check mesos command installed
+  stat: path=/usr/local/bin/mesos
+  register: mesos_mesos_command_installed_stat
+
+- name: Install mesos
+  command: "make install"
+  args:
+    chdir: /usr/local/src/mesos-{{ mesos_version }}/build
+  when: mesos_mesos_command_installed_stat.stat.exists == False
