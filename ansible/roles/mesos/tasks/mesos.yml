@@ -1,0 +1,40 @@
+---
+
+- name: Check mesos archive exists
+  stat: path=/usr/local/mesos-{{ mesos_version }}.tar.gz
+  register: mesos_archive_stat
+
+- name: Download mesos archive
+  get_url: url={{ mesos_base_url }}/{{ mesos_version }}/mesos-{{ mesos_version }}.tar.gz dest=/usr/local/mesos-{{ mesos_version }}.tar.gz mode=0440
+  when: mesos_archive_stat.stat.exists == False
+
+- name: Check mesos build directory exists
+  stat: path=/usr/local/src/mesos-{{ mesos_version }}
+  register: mesos_build_directory_stat
+
+- name: Extract mesos archive
+  command: "tar xfz /usr/local/mesos-{{ mesos_version }}.tar.gz -C /usr/local/src"
+  when: mesos_build_directory_stat.stat.exists == False
+
+- name: Check mesos build directory exists
+  stat: path=/usr/local/src/mesos-{{ mesos_version }}/build
+  register: mesos_build_directory_stat
+
+- name: Creates mesos build directory
+  file: path=/usr/local/src/mesos-{{ mesos_version }}/build state=directory owner=www-data group=root mode=0775
+  when: mesos_build_directory_stat.stat.exists == False
+
+- name: Check mesos Makefile exists
+  stat: path=/usr/local/src/mesos-{{ mesos_version }}/build/Makefile
+  register: mesos_makefile_stat
+
+- name: Configure mesos
+  command: "../configure"
+  args:
+    chdir: /usr/local/src/mesos-{{ mesos_version }}/build
+  when: mesos_makefile_stat.stat.exists == False
+
+- name: Build mesos
+  command: "make"
+  args:
+    chdir: /usr/local/src/mesos-{{ mesos_version }}/build

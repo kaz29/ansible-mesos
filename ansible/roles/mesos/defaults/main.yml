@@ -1,0 +1,24 @@
+---
+
+mesos_base_url: "http://www.apache.org/dist/mesos/"
+mesos_version: "0.28.0"
+
+mesos_packages:
+  - tar
+  - curl
+  - wget
+  - git
+  - openjdk-7-jdk
+  - autoconf
+  - libtool
+  - build-essential
+  - python-dev
+  - python-boto
+  - libcurl4-nss-dev
+  - libsasl2-dev
+  - libsasl2-modules
+  - maven
+  - libapr1-dev
+  - libsvn-dev
+
+mesos_option_packages: []
