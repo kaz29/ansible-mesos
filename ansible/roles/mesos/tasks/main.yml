@@ -8,3 +8,6 @@
 
 - include: zookeeper.yml
   when: mesos_install_source is defined and mesos_install_source == False
+
+- include: mesos.yml
+  when: mesos_install_source is defined and mesos_install_source == False

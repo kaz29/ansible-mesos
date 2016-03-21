@@ -1,0 +1,30 @@
+---
+- name: Setup mesos zk
+  template: src=mesos-zk.j2
+            dest=/etc/mesos/zk
+            owner=root group=root mode=0640
+  notify: restart mesos-master
+
+- name: Setup mesos quorum
+  template: src=mesos-quorum.j2
+            dest=/etc/mesos-master/quorum
+            owner=root group=root mode=0640
+  notify: restart mesos-master
+
+- name: Setup mesos hostname
+  template: src=mesos-hostname.j2
+            dest=/etc/mesos-master/hostname
+            owner=root group=root mode=0640
+  notify: restart mesos-master
+
+- name: Setup mesos ip
+  template: src=mesos-ip.j2
+            dest=/etc/mesos-master/ip
+            owner=root group=root mode=0640
+  notify: restart mesos-master
+
+- name: Setup mesos cluster name
+  template: src=mesos-cluster.j2
+            dest=/etc/mesos-master/cluster
+            owner=root group=root mode=0640
+  notify: restart mesos-master

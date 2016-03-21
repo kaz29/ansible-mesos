@@ -1,8 +1,5 @@
 ---
 
-- debug: msg="Zookeeper id is {{mesos_zookeeper_id}}"
-- debug: msg="ipaddress is {{ mesos_interface_ipaddress }}"
-
 - name: Add mesosphere APT key
   apt_key: keyserver=keyserver.ubuntu.com state=present id=E56151BF
   register: mesos_repo_installed

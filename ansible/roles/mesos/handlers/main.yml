@@ -1,3 +1,6 @@
 ---
 - name: restart zookeeper
   shell: service zookeeper restart
+
+- name: restart mesos-master
+  shell: service mesos-master restart

@@ -9,7 +9,7 @@ mesos_source_packages:
   - tar
   - curl
   - wget
-  - git
+  - git-core
   - openjdk-7-jdk
   - autoconf
   - libtool
@@ -25,7 +25,16 @@ mesos_source_packages:
   - language-pack-ja
 
 mesos_apt_url: "http://repos.mesosphere.com/{{ ansible_distribution | lower }}"
-mesos_version: "0.25.0"
-mesos_package_version: "0.2.70"
+mesos_version: "0.28.0"
+mesos_package_version: "2.0.16"
+
+mesos_servers: []
+
+mesos_zookeeper_servers: []
+
+mesos_quorum: 2
+mesos_ip: '{{ ansible_eth1.ipv4.address }}'
+mesos_hostname: '{{ ansible_eth1.ipv4.address }}'
+mesos_cluster_name: 'Cluster01'
 
 mesos_option_packages: []

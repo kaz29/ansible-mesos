@@ -1,4 +1,3 @@
 ---
 
 mesos_zookeeper_id: 3
-mesos_interface_ipaddress: '{{ ansible_eth1.ipv4.address }}'
