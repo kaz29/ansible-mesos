@@ -17,3 +17,15 @@
             dest=/etc/mesos/zk
             owner=root group=root mode=0640
   notify: restart mesos-slave
+
+- name: Setup mesos hostname
+  template: src=mesos-hostname.j2
+            dest=/etc/mesos-slave/hostname
+            owner=root group=root mode=0640
+  notify: restart mesos-slave
+
+- name: Setup mesos ip
+  template: src=mesos-ip.j2
+            dest=/etc/mesos-slave/ip
+            owner=root group=root mode=0640
+  notify: restart mesos-slave
