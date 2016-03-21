@@ -1,0 +1,10 @@
+- name: Mesos Master03 Server
+  hosts: master03
+  sudo: true
+
+  roles:
+    - mesos
+
+  vars_files:
+    - files/{{ target }}/mesos.yml
+    - files/{{ target }}/mesos-{{ inventory_hostname_short }}.yml

@@ -1,5 +1,5 @@
-- name: Mesos Master Server
-  hosts: master
+- name: Mesos Master01 Server
+  hosts: master01
   sudo: true
 
   roles:
