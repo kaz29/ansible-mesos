@@ -1,8 +1,0 @@
----
-- name: Install mesos Packages
-  apt:
-    pkg: "{{ item }}"
-    state: present
-  with_flattened:
-    - mesos_packages
-    - mesos_option_packages

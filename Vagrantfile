@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     server.vm.hostname = "master01"
     server.vm.network :private_network, ip: "192.168.39.10"
     server.vm.network :forwarded_port, host: 8022, guest: 22
-    server.vm.network :forwarded_port, host: 8080, guest: 8080
+    server.vm.network :forwarded_port, host: 5050, guest: 5050
     server.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
     end

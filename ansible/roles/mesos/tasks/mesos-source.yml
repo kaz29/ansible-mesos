@@ -1,5 +1,13 @@
 ---
 
+- name: Install mesos Packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_flattened:
+    - mesos_source_packages
+    - mesos_option_packages
+
 - name: Check mesos archive exists
   stat: path=/usr/local/mesos-{{ mesos_version }}.tar.gz
   register: mesos_archive_stat

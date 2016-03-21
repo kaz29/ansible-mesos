@@ -1,5 +1,7 @@
 ---
 
-- include: packages.yml
+- include: mesos-source.yml
+  when: mesos_install_source is defined and mesos_install_source == True
 
-- include: mesos.yml
+- include: mesos-repo.yml
+  when: mesos_install_source is defined and mesos_install_source == False

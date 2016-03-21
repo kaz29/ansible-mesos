@@ -1,9 +1,11 @@
 ---
 
+mesos_install_source: False
+
 mesos_base_url: "http://www.apache.org/dist/mesos/"
 mesos_version: "0.28.0"
 
-mesos_packages:
+mesos_source_packages:
   - tar
   - curl
   - wget
@@ -20,5 +22,10 @@ mesos_packages:
   - maven
   - libapr1-dev
   - libsvn-dev
+  - language-pack-ja
+
+mesos_apt_url: "http://repos.mesosphere.com/{{ ansible_distribution | lower }}"
+mesos_version: "0.25.0"
+mesos_package_version: "0.2.70"
 
 mesos_option_packages: []
