@@ -32,7 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     server.vm.provision :ansible do |ansible|
       ansible.limit = 'all'
       ansible.inventory_path = "ansible/hosts/vagrant"
-      ansible.playbook = "ansible/vagrant-master01.yml"
+      ansible.playbook = "ansible/vagrant-master.yml"
     end
   end
 end

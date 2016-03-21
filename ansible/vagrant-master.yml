@@ -1,0 +1,12 @@
+- name: Mesos Master Server
+  hosts: master
+  sudo: true
+
+  roles:
+    - packages
+    - mesos
+
+  vars_files:
+    - files/packages.yml
+    - files/{{ target }}/mesos.yml
+    - files/{{ target }}/mesos-{{ inventory_hostname_short }}.yml

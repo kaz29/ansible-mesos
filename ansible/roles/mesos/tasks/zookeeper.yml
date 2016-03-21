@@ -1,0 +1,14 @@
+---
+- name: Setup zookeeper id
+  template: src=zookeeper-myid.j2
+            dest=/etc/zookeeper/conf/myid
+            owner=root group=root mode=0644
+  when: mesos_zookeeper_id is defined
+  notify: restart zookeeper
+
+- name: Configure zookeeper
+  template: src=zookeeper-zoo.cfg.j2
+            dest=/etc/zookeeper/conf/zoo.cfg
+            owner=root group=root mode=0644
+  when: mesos_zookeeper_servers is defined
+  notify: restart zookeeper

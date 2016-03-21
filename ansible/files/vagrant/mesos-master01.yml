@@ -1,0 +1,8 @@
+---
+
+mesos_zookeeper_id: 1
+mesos_interface_ipaddress: '{{ ansible_eth1.ipv4.address }}'
+mesos_zookeeper_servers:
+  - host: 192.168.33.10
+  - host: 192.168.33.11
+  - host: 192.168.33.12
