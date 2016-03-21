@@ -59,4 +59,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.playbook = "ansible/vagrant-master03.yml"
     end
   end
+
+  config.vm.define :slave01 do |server|
+    server.vm.hostname = "slave01"
+    server.vm.network :private_network, ip: "192.168.39.13"
+    server.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+    server.vm.provision :ansible do |ansible|
+      ansible.limit = 'all'
+      ansible.inventory_path = "ansible/hosts/vagrant"
+      ansible.playbook = "ansible/vagrant-slave01.yml"
+    end
+  end
+
+  config.vm.define :slave02 do |server|
+    server.vm.hostname = "slave02"
+    server.vm.network :private_network, ip: "192.168.39.14"
+    server.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+    server.vm.provision :ansible do |ansible|
+      ansible.limit = 'all'
+      ansible.inventory_path = "ansible/hosts/vagrant"
+      ansible.playbook = "ansible/vagrant-slave02.yml"
+    end
+  end
 end

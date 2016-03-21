@@ -2,5 +2,17 @@
 - name: restart zookeeper
   shell: service zookeeper restart
 
+- name: stop zookeeper
+  shell: service zookeeper stop
+
 - name: restart mesos-master
   shell: service mesos-master restart
+
+- name: stop mesos-master
+  shell: service mesos-master stop
+
+- name: restart mesos-slave
+  shell: service mesos-slave restart
+
+- name: stop mesos-slave
+  shell: service mesos-master stop

@@ -1,30 +1,38 @@
 ---
-- name: Setup mesos zk
-  template: src=mesos-zk.j2
-            dest=/etc/mesos/zk
-            owner=root group=root mode=0640
-  notify: restart mesos-master
 
-- name: Setup mesos quorum
-  template: src=mesos-quorum.j2
-            dest=/etc/mesos-master/quorum
-            owner=root group=root mode=0640
-  notify: restart mesos-master
+- name: Add mesosphere APT key
+  apt_key: keyserver=keyserver.ubuntu.com state=present id=E56151BF
+  register: mesos_repo_installed
 
-- name: Setup mesos hostname
-  template: src=mesos-hostname.j2
-            dest=/etc/mesos-master/hostname
-            owner=root group=root mode=0640
-  notify: restart mesos-master
+- name: Add mesosphere APT repository
+  apt_repository: repo='deb {{ mesos_apt_url }} {{ansible_distribution_release|lower}} main' state=present
+  register: mesos_repo_installed
 
-- name: Setup mesos ip
-  template: src=mesos-ip.j2
-            dest=/etc/mesos-master/ip
-            owner=root group=root mode=0640
-  notify: restart mesos-master
+- name: Add java APT repository
+  apt_repository: repo='ppa:webupd8team/java'
 
-- name: Setup mesos cluster name
-  template: src=mesos-cluster.j2
-            dest=/etc/mesos-master/cluster
-            owner=root group=root mode=0640
-  notify: restart mesos-master
+- name: Autoaccept license for Java8
+  debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+
+- name: Install mesos Packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - wget
+    - curl
+    - unzip
+    - python-setuptools
+    - python-dev
+    - git
+    - language-pack-ja
+    - mesos={{mesos_version}}-{{mesos_package_version}}.{{ansible_distribution|lower}}{{ansible_distribution_version.split('.')|join('')}}
+    - oracle-java8-installer
+
+- name: Install mesos-master Packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - marathon
+  when: mesos_master is defined and mesos_master == True

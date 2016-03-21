@@ -1,20 +1,6 @@
 ---
 
-- name: Add mesosphere APT key
-  apt_key: keyserver=keyserver.ubuntu.com state=present id=E56151BF
-  register: mesos_repo_installed
-
-- name: Add mesosphere APT repository
-  apt_repository: repo='deb {{ mesos_apt_url }} {{ansible_distribution_release|lower}} main' state=present
-  register: mesos_repo_installed
-
-- name: Add java APT repository
-  apt_repository: repo='ppa:webupd8team/java'
-
-- name: Autoaccept license for Java8
-  debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
-
-- name: Install mesos Packages
+- name: Install mesos-server Packages
   apt:
     pkg: "{{ item }}"
     state: present

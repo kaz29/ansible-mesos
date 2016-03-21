@@ -1,3 +1,4 @@
 ---
 
+mesos_master: True
 mesos_zookeeper_id: 1

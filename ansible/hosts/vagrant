@@ -7,5 +7,11 @@ master02 ansible_ssh_user=vagrant ansible_ssh_host=192.168.39.11 ansible_ssh_por
 [master03]
 master03 ansible_ssh_user=vagrant ansible_ssh_host=192.168.39.12 ansible_ssh_port=22 ansible_ssh_private_key_file=.vagrant/machines/master03/virtualbox/private_key
 
+[slave01]
+slave01 ansible_ssh_user=vagrant ansible_ssh_host=192.168.39.13 ansible_ssh_port=22 ansible_ssh_private_key_file=.vagrant/machines/slave01/virtualbox/private_key
+
+[slave02]
+slave02 ansible_ssh_user=vagrant ansible_ssh_host=192.168.39.14 ansible_ssh_port=22 ansible_ssh_private_key_file=.vagrant/machines/slave02/virtualbox/private_key
+
 [all:vars]
 target=vagrant

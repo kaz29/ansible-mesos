@@ -1,0 +1,10 @@
+- name: Mesos Slave02 Server
+  hosts: slave02
+  sudo: true
+
+  roles:
+    - mesos
+
+  vars_files:
+    - files/{{ target }}/mesos.yml
+    - files/{{ target }}/mesos-{{ inventory_hostname_short }}.yml

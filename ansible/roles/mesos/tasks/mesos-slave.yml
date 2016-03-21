@@ -1,0 +1,19 @@
+---
+
+- name: Stop zookeeper
+  template: src=zookeeper.override.j2
+            dest=/etc/init/zookeeper.override
+            owner=root group=root mode=0640
+  notify: stop zookeeper
+
+- name: Stop mesos-master
+  template: src=mesos-master.override.j2
+            dest=/etc/init/mesos-master.override
+            owner=root group=root mode=0640
+  notify: stop mesos-master
+
+- name: Setup mesos zk
+  template: src=mesos-zk.j2
+            dest=/etc/mesos/zk
+            owner=root group=root mode=0640
+  notify: restart mesos-slave

@@ -3,11 +3,13 @@
 #- include: mesos-source.yml
 #  when: mesos_install_source is defined and mesos_install_source == True
 
-- include: mesos-repo.yml
-  when: mesos_install_source is defined and mesos_install_source == False
+- include: mesos.yml
 
 - include: zookeeper.yml
-  when: mesos_install_source is defined and mesos_install_source == False
+  when: mesos_master is defined and mesos_master == True
 
-- include: mesos.yml
-  when: mesos_install_source is defined and mesos_install_source == False
+- include: mesos-master.yml
+  when: mesos_master is defined and mesos_master == True
+
+- include: mesos-slave.yml
+  when: mesos_slave is defined and mesos_slave == True
